@@ -12,6 +12,8 @@ import lib.utils as utils
 from lib.encoder_decoder import *
 from lib.likelihood_eval import *
 
+from utils.mmd_loss import MMDLoss
+
 from torch.distributions.multivariate_normal import MultivariateNormal
 from torch.distributions.normal import Normal
 from torch.nn.modules.rnn import GRUCell, LSTMCell, RNNCellBase
@@ -250,6 +252,14 @@ class VAE_Baseline(nn.Module):
 		return torch.mean(log_density_data)
 
 
+	def get_mmd(self, truth, pred_y, mask=None):
+		mmd_loss = MMDLoss()
+		loss = []
+		for i in range(pred_y.size(0)):
+			loss.append(mmd_loss(pred_y[i].squeeze(), truth.squeeze()))
+		return torch.mean(torch.stack(loss))
+
+
 	def compute_all_losses(self, batch_dict, n_traj_samples = 1, kl_coef = 1.):
 		# Condition on subsampled points
 		# Make predictions for all the points
@@ -286,6 +296,12 @@ class VAE_Baseline(nn.Module):
 		mse = self.get_mse(
 			batch_dict["data_to_predict"], pred_y,
 			mask = batch_dict["mask_predicted_data"])
+
+		mmd = self.get_mmd(
+			batch_dict["data_to_predict"], 
+   			pred_y,
+			mask = batch_dict["mask_predicted_data"]
+		)
 
 		pois_log_likelihood = torch.Tensor([0.]).to(get_device(batch_dict["data_to_predict"]))
 		if self.use_poisson_proc:
@@ -329,6 +345,7 @@ class VAE_Baseline(nn.Module):
 		results["loss"] = torch.mean(loss)
 		results["likelihood"] = torch.mean(rec_likelihood).detach()
 		results["mse"] = torch.mean(mse).detach()
+		results["mmd"] = mmd.detach()
 		results["pois_likelihood"] = torch.mean(pois_log_likelihood).detach()
 		results["ce_loss"] = torch.mean(ce_loss).detach()
 		results["kl_first_p"] =  torch.mean(kldiv_z0).detach()

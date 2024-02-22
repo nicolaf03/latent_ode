@@ -99,7 +99,7 @@ def create_LatentODE_model(args, input_dim, z0_prior, obsrv_std, device,
 		linear_classifier = args.linear_classif,
 		classif_per_tp = classif_per_tp,
 		n_labels = n_labels,
-		train_classif_w_reconstr = (args.dataset == "physionet")
+		train_classif_w_reconstr = False
 		).to(device)
 
 	return model

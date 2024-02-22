@@ -252,7 +252,7 @@ def get_ckpt_model(ckpt_path, model, device):
 	if not os.path.exists(ckpt_path):
 		raise Exception("Checkpoint " + ckpt_path + " does not exist.")
 	# Load checkpoint.
-	checkpt = torch.load(ckpt_path)
+	checkpt = torch.load(ckpt_path, map_location=torch.device('cpu'))
 	ckpt_args = checkpt['args']
 	state_dict = checkpt['state_dict']
 	model_dict = model.state_dict()
@@ -521,6 +521,7 @@ def compute_loss_all_batches(model,
 	total["loss"] = 0
 	total["likelihood"] = 0
 	total["mse"] = 0
+	total["mmd"] = 0
 	total["kl_first_p"] = 0
 	total["std_first_p"] = 0
 	total["pois_likelihood"] = 0
