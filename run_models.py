@@ -34,14 +34,16 @@ from lib.ode_func import ODEFunc, ODEFunc_w_Poisson
 from lib.diffeq_solver import DiffeqSolver
 from mujoco_physics import HopperPhysics
 
+import wandb
+
 from lib.utils import compute_loss_all_batches
 
 # Generative model for noisy data based on ODE
 parser = argparse.ArgumentParser('Latent ODE')
 parser.add_argument('-n',  type=int, default=100, help="Size of the dataset")
-parser.add_argument('--niters', type=int, default=300)
+parser.add_argument('--niters', type=int, default=30)
 parser.add_argument('--lr',  type=float, default=1e-2, help="Starting learning rate.")
-parser.add_argument('-b', '--batch-size', type=int, default=50)
+parser.add_argument('-b', '--batch-size', type=int, default=16)
 parser.add_argument('--viz', action='store_true', help="Show plots while training")
 
 parser.add_argument('--save', type=str, default='experiments/', help="Path for save checkpoints")
@@ -84,12 +86,17 @@ parser.add_argument('--classif', action='store_true', help="Include binary class
 parser.add_argument('--linear-classif', action='store_true', help="If using a classifier, use a linear classifier instead of 1-layer NN")
 parser.add_argument('--extrap', action='store_true', help="Set extrapolation mode. If this flag is not set, run interpolation mode.")
 
-parser.add_argument('-t', '--timepoints', type=int, default=100, help="Total number of time-points")
+parser.add_argument('-t', '--timepoints', type=int, default=64, help="Total number of time-points")
 parser.add_argument('--max-t',  type=float, default=5., help="We subsample points in the interval [0, args.max_tp]")
 parser.add_argument('--noise-weight', type=float, default=0.01, help="Noise amplitude for generated traejctories")
 
+parser.add_argument('--wandb', type=str, default='offline')
+
 
 args = parser.parse_args()
+
+os.environ['WANDB_MODE'] = args.wandb
+wandb.init(project='wind_latentODE')
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 file_name = os.path.basename(__file__)[:-3]
@@ -120,6 +127,8 @@ if __name__ == '__main__':
 	utils.makedirs("results/")
 
 	##################################################################
+	args.latent_ode = True
+	# IMPORT DATA
 	data_obj = parse_datasets(args, device)
 	input_dim = data_obj["input_dim"]
 
@@ -152,7 +161,7 @@ if __name__ == '__main__':
 		if args.poisson:
 			print("Poisson process likelihood not implemented for RNN-VAE: ignoring --poisson")
 
-		# Create RNN-VAE model
+		print('Create RNN-VAE model')
 		model = RNN_VAE(input_dim, args.latents, 
 			device = device, 
 			rec_dims = args.rec_dims, 
@@ -176,7 +185,7 @@ if __name__ == '__main__':
 
 		if args.extrap:
 			raise Exception("Extrapolation for standard RNN not implemented")
-		# Create RNN model
+		print('Create RNN model')
 		model = Classic_RNN(input_dim, args.latents, device, 
 			concat_mask = True, obsrv_std = obsrv_std,
 			n_units = args.units,
@@ -189,7 +198,7 @@ if __name__ == '__main__':
 			train_classif_w_reconstr = (args.dataset == "physionet")
 			).to(device)
 	elif args.ode_rnn:
-		# Create ODE-GRU model
+		print('Create ODE-GRU model')
 		n_ode_gru_dims = args.latents
 				
 		if args.poisson:
@@ -309,6 +318,14 @@ if __name__ == '__main__':
 				'args': args,
 				'state_dict': model.state_dict(),
 			}, ckpt_path)
+
+			wandb.log(
+                {
+                    'train loss': train_res["loss"].detach(),
+                    'test MSE': test_res["mse"],
+                    'kl_coef': kl_coef
+                 }
+            )
 
 
 			# Plotting

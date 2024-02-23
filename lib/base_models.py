@@ -97,8 +97,7 @@ class Baseline(nn.Module):
 		return torch.mean(log_density_data)
 
 
-	def compute_all_losses(self, batch_dict,
-		n_tp_to_sample = None, n_traj_samples = 1, kl_coef = 1.):
+	def compute_all_losses(self, batch_dict, n_tp_to_sample = None, n_traj_samples = 1, kl_coef = 1.):
 
 		# Condition on subsampled points
 		# Make predictions for all the points
@@ -153,9 +152,9 @@ class Baseline(nn.Module):
 
 		if self.use_binary_classif:
 			if self.train_classif_w_reconstr:
-				loss = loss +  ce_loss * 100
+				loss = loss + ce_loss * 100
 			else:
-				loss =  ce_loss
+				loss = ce_loss
 
 		# Take mean over the number of samples in a batch
 		results = {}

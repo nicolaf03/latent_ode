@@ -20,8 +20,7 @@ from lib.ode_func import ODEFunc, ODEFunc_w_Poisson
 
 #####################################################################################################
 
-def create_LatentODE_model(args, input_dim, z0_prior, obsrv_std, device, 
-	classif_per_tp = False, n_labels = 1):
+def create_LatentODE_model(args, input_dim, z0_prior, obsrv_std, device, classif_per_tp = False, n_labels = 1):
 
 	dim = args.latents
 	if args.poisson:
@@ -99,7 +98,7 @@ def create_LatentODE_model(args, input_dim, z0_prior, obsrv_std, device,
 		linear_classifier = args.linear_classif,
 		classif_per_tp = classif_per_tp,
 		n_labels = n_labels,
-		train_classif_w_reconstr = (args.dataset == "physionet")
+		train_classif_w_reconstr = False#(args.dataset == "physionet")
 		).to(device)
 
 	return model

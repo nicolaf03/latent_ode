@@ -1,0 +1,26 @@
+/Users/nicolafraccarolo/Documents/GitHub/latent_ode/run_models.py
+run_models.py --niters 500 -n 1000 --dataset periodic --latent-ode
+Experiment 43799
+Epoch 0001 [Test seq (cond on sampled tp)] | Loss 2717.892334 | Likelihood -2725.586670 | KL fp 3.5948 | FP STD 0.9229|
+KL coef: 0.0
+Train loss (one batch): 2732.5693359375
+Train CE loss (one batch): 0.0
+Test MSE: 0.5459
+Poisson likelihood: 0.0
+CE loss: 0.0
+Experiment 43799
+Epoch 0002 [Test seq (cond on sampled tp)] | Loss 2390.819580 | Likelihood -2394.169922 | KL fp 6.2547 | FP STD 0.2421|
+KL coef: 0.0
+Train loss (one batch): 2407.11669921875
+Train CE loss (one batch): 0.0
+Test MSE: 0.4796
+Poisson likelihood: 0.0
+CE loss: 0.0
+Experiment 43799
+Epoch 0003 [Test seq (cond on sampled tp)] | Loss 2374.376709 | Likelihood -2375.507812 | KL fp 6.3912 | FP STD 0.2695|
+KL coef: 0.0
+Train loss (one batch): 2374.65283203125
+Train CE loss (one batch): 0.0
+Test MSE: 0.4758
+Poisson likelihood: 0.0
+CE loss: 0.0
