@@ -1,0 +1,92 @@
+/Users/nicolafraccarolo/Documents/GitHub/latent_ode/main.py
+main.py --wandb online
+Experiment 12980
+Epoch 0001 [Test seq (cond on sampled tp)] | Loss 940.642822 | Likelihood -1001.322998 | KL fp 2.5566 | FP STD 0.1570|
+KL coef: 0.0
+Train loss (one batch): 756.2064819335938
+Train CE loss (one batch): 0.0
+MSE (TEST): 0.2010018676519394
+Poisson likelihood (TEST): 0.0
+CE loss (TEST): 0.0
+
+Experiment 12980
+Epoch 0002 [Test seq (cond on sampled tp)] | Loss 470.253998 | Likelihood -491.233734 | KL fp 2.9696 | FP STD 0.0931|
+KL coef: 0.0
+Train loss (one batch): 397.49468994140625
+Train CE loss (one batch): 0.0
+MSE (TEST): 0.098983995616436
+Poisson likelihood (TEST): 0.0
+CE loss (TEST): 0.0
+
+Experiment 12980
+Epoch 0003 [Test seq (cond on sampled tp)] | Loss 320.268280 | Likelihood -329.608551 | KL fp 3.1486 | FP STD 0.0755|
+KL coef: 0.0
+Train loss (one batch): 317.540283203125
+Train CE loss (one batch): 0.0
+MSE (TEST): 0.06665895879268646
+Poisson likelihood (TEST): 0.0
+CE loss (TEST): 0.0
+
+Experiment 12980
+Epoch 0004 [Test seq (cond on sampled tp)] | Loss 314.377350 | Likelihood -317.167450 | KL fp 3.7585 | FP STD 0.0446|
+KL coef: 0.0
+Train loss (one batch): 508.2978820800781
+Train CE loss (one batch): 0.0
+MSE (TEST): 0.0641707256436348
+Poisson likelihood (TEST): 0.0
+CE loss (TEST): 0.0
+
+Experiment 12980
+Epoch 0005 [Test seq (cond on sampled tp)] | Loss 268.607147 | Likelihood -271.007782 | KL fp 3.6884 | FP STD 0.0428|
+KL coef: 0.0
+Train loss (one batch): 201.18484497070312
+Train CE loss (one batch): 0.0
+MSE (TEST): 0.05493880808353424
+Poisson likelihood (TEST): 0.0
+CE loss (TEST): 0.0
+
+Experiment 12980
+Epoch 0006 [Test seq (cond on sampled tp)] | Loss 261.086700 | Likelihood -263.406219 | KL fp 3.8872 | FP STD 0.0372|
+KL coef: 0.0
+Train loss (one batch): 218.1972198486328
+Train CE loss (one batch): 0.0
+MSE (TEST): 0.053418487310409546
+Poisson likelihood (TEST): 0.0
+CE loss (TEST): 0.0
+
+Experiment 12980
+Epoch 0007 [Test seq (cond on sampled tp)] | Loss 269.355927 | Likelihood -273.892181 | KL fp 3.5490 | FP STD 0.0447|
+KL coef: 0.0
+Train loss (one batch): 217.43603515625
+Train CE loss (one batch): 0.0
+MSE (TEST): 0.055515676736831665
+Poisson likelihood (TEST): 0.0
+CE loss (TEST): 0.0
+
+Experiment 12980
+Epoch 0008 [Test seq (cond on sampled tp)] | Loss 238.261734 | Likelihood -243.551025 | KL fp 3.6747 | FP STD 0.0450|
+KL coef: 0.0
+Train loss (one batch): 197.44467163085938
+Train CE loss (one batch): 0.0
+MSE (TEST): 0.049447447061538696
+Poisson likelihood (TEST): 0.0
+CE loss (TEST): 0.0
+
+Experiment 12980
+Epoch 0009 [Test seq (cond on sampled tp)] | Loss 159.880829 | Likelihood -167.784439 | KL fp 3.7830 | FP STD 0.0384|
+KL coef: 0.0
+Train loss (one batch): 404.5094299316406
+Train CE loss (one batch): 0.0
+MSE (TEST): 0.03429413586854935
+Poisson likelihood (TEST): 0.0
+CE loss (TEST): 0.0
+
+Experiment 12980
+Epoch 0010 [Test seq (cond on sampled tp)] | Loss 105.177254 | Likelihood -107.397430 | KL fp 3.9740 | FP STD 0.0298|
+KL coef: 0.0
+Train loss (one batch): 80.67782592773438
+Train CE loss (one batch): 0.0
+MSE (TEST): 0.022216729819774628
+Poisson likelihood (TEST): 0.0
+CE loss (TEST): 0.0
+
